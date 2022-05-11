@@ -10,26 +10,26 @@ let monTableau = new Tableau2D(10, 10);
 
 function De10() {
     let nombreFace = 10
-    return Math.floor(Math.random() * nombreFace );
+    return Math.floor(Math.random() * nombreFace);
 }
 function De8() {
     let nombreFace = 8
-    return Math.floor(Math.random() * nombreFace );
+    return Math.floor(Math.random() * nombreFace);
 }
 function De6() {
     let nombreFace = 6
-    return Math.floor(Math.random() * nombreFace );
+    return Math.floor(Math.random() * nombreFace);
 }
 
 
-TabMalus = ["Bonus1", "Bonus2","Bonus3","Malus1", "Malus2", "Malus3","Malus4","Malus5"]
+TabMalus = ["Bonus1", "Bonus2", "Bonus3", "Malus1", "Malus2", "Malus3", "Malus4", "Malus5"]
 
-TabCommentairesMalus=["Vous tombez sur des moines qui se sont égarés, ils vous font donc tester leur dernière cuvée de 9e centenaire, vous en buvez trop est tombez dans un coma.",
-" lors d'une randonnée un dahu vous attaque,  vous vous cassez la cheville.","Un écologiste bobo apparaît et vous sermonne car vous ne mangez pas du quinoa . ","Vous rencontrez Jean la Salle et partez en campagne avec lui .",
-"Vous venez de vous rappeler que vous n'avez pas fermé la porte de votre garage vous rentrez donc chez vous pour la fermer .","Vous faites arrêter la par la police car vous utilisez vos clignotants ."]
+TabCommentairesMalus = ["Vous tombez sur des moines qui se sont égarés, ils vous font donc tester leur dernière cuvée de 9e centenaire, vous en buvez trop est tombez dans un coma.",
+    " lors d'une randonnée un dahu vous attaque,  vous vous cassez la cheville.", "Un écologiste bobo apparaît et vous sermonne car vous ne mangez pas du quinoa . ", "Vous rencontrez Jean la Salle et partez en campagne avec lui .",
+    "Vous venez de vous rappeler que vous n'avez pas fermé la porte de votre garage vous rentrez donc chez vous pour la fermer .", "Vous faites arrêter la par la police car vous utilisez vos clignotants ."]
 
-TabCommentairesBonus=["Vous retrouvez  le skateboard volant de quelqu'un qui vous ramène quelques temps en arrière.","Vous vous rasez et avez l'air donc plus jeune .","Vous avez trouvé un raccourci pour arriver à cette destination.",
-"vous craquez le jeu et gagnez du temps .","Les dieux ont été cléments envers vous ","Vous avez donné une Tesla à Mr Roumanet ce qui vous permet d'être plus rapide ."]
+TabCommentairesBonus = ["Vous retrouvez  le skateboard volant de quelqu'un qui vous ramène quelques temps en arrière.", "Vous vous rasez et avez l'air donc plus jeune .", "Vous avez trouvé un raccourci pour arriver à cette destination.",
+    "vous craquez le jeu et gagnez du temps .", "Les dieux ont été cléments envers vous ", "Vous avez donné une Tesla à Mr Roumanet ce qui vous permet d'être plus rapide ."]
 
 console.log(TabMalus)
 
@@ -76,7 +76,7 @@ function choix(id) {
 
 
     if (monTableau[idx][idy] == "Tresor") {
-        
+
         Findepartie = true
         console.log("trouvé")
         idcase.style.pointerEvents = "none"
@@ -92,7 +92,7 @@ function choix(id) {
         compteurDeJours = compteurDeJours + 3
         idcase.style.backgroundColor = "rgba(255, 200, 0, 0.707)";
         idcase.style.pointerEvents = "none"
-        CommentairesMalus.innerHTML = TabCommentairesMalus[De6()]+ "<Malus2> Pénalitée de 3 jours </Malus2>"
+        CommentairesMalus.innerHTML = TabCommentairesMalus[De6()] + "<Malus2> Pénalitée de 3 jours </Malus2>"
 
     }
     else if (monTableau[idx][idy] == "Malus3") {
@@ -110,7 +110,7 @@ function choix(id) {
 
     }
     else if (monTableau[idx][idy] == "Malus5") {
-        compteurDeJours = compteurDeJours +6
+        compteurDeJours = compteurDeJours + 6
         idcase.style.backgroundColor = "rgba(255, 0, 0, 0.738)";
         idcase.style.pointerEvents = "none"
         CommentairesMalus.innerHTML = TabCommentairesMalus[De6()] + "<Malus5> Pénalitée de 6 jours </Malus5>"
@@ -147,9 +147,45 @@ function choix(id) {
 
     }
     document.getElementById("jours").innerHTML = compteurDeJours
+    BousoleNSOE()
 
 
 }
 
+function BousoleNSOE() {
+    let bousole = ""
 
-//zhfgzygfzgfzf
+    for (let i = 0; i < monTableau.length; i++) {
+
+        for (let j = 0; j < monTableau.length; j++) {
+
+            if (monTableau[i][j] == "Tresor") {
+                coordonesX = i
+                coordonesY = j
+            }
+        }
+
+    }
+    console.log(coordonesX,coordonesY)
+
+    if (compteurDeJours > 15) {
+        if (coordonesX < 4 && coordonesY < 4) {
+            bousole = "Essayez au nord ouest"
+
+        }
+        else if (coordonesX > 4 && coordonesY < 4) {
+            bousole = "Essayez au nord est"
+
+        }
+        else if (coordonesX < 4 && coordonesY > 4) {
+            bousole = "Essayez au sud ouest"
+
+        }
+        else if (coordonesX > 4 && coordonesY > 4) {
+            bousole = "Essayez au sud est"
+
+        }
+
+    }
+    return document.getElementById("bousole").innerHTML = bousole
+}
