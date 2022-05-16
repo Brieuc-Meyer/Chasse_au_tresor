@@ -6,16 +6,23 @@ body{
 
 }
 td{
-    width: 49px;
-    height: 49px;
+    width: 80px;
+    height: 80px;
     border-width: 1px;
     border-color: rgb(255, 255, 255);
     border-style: solid;
-    padding: 1em;
+    padding: 0px;
 }
 table{
     border-collapse: collapse;
-    background-image: url("D:/BTS SIO/B1 DEV/JavaScript/Chasse_au_tresor/v1/medias/mapGrenoble.png");
+    background-image: url("http://localhost/Chasse_au_tresor/v1/medias/mapGrenoble.png");
+    display: inline-block;
+    height: 800px;
+    width: 800px;
+}
+#table{
+    display: inline-block;
+
 }
 
 
@@ -46,32 +53,35 @@ table{
 }
 
 Malus1{
-    color: rgba(255, 225, 0, 0.858);
+    color: rgb(255, 225, 0);
 }
 Malus2{
-    color: rgba(255, 200, 0, 0.707);
+    color: rgb(255, 200, 0);
 }
 Malus3{
-    color: rgba(255, 174, 0, 0.845)
+    color: rgb(255, 174, 0)
 }
 Malus4{
-    color: rgba(255, 102, 0, 0.759)
+    color: rgb(255, 102, 0)
 }
 Malus5{
-    color: rgba(255, 0, 0, 0.738);
+    color: rgb(255, 0, 0);
 }
 
 
 Bonus1{
-    color: rgba(0, 255, 157, 0.797);
+    color: rgb(0, 255, 157);
 }
 Bonus2{
-    color: rgba(0, 255, 234, 0.821);
+    color: rgb(0, 255, 234);
 }
 Bonus3{
-    color: rgba(0, 204, 255, 0.707);
+    color: rgb(0, 204, 255);
 }
 
 RAS{
-    color: rgba(128, 128, 128, 0.773);
+    color: rgb(128, 128, 128);
+}
+tresor{
+    color: rgb(255, 0, 226);
 }

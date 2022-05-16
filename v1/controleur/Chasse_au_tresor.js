@@ -1,4 +1,8 @@
+// Auteur : Brieuc Meyer 
+
 compteurDeJours = 0
+
+//initilalisisation tableau javascript
 function Tableau2D(x, y) {
     var array2D = new Array(x);
     for (var i = 0; i < array2D.length; i++) {
@@ -8,6 +12,7 @@ function Tableau2D(x, y) {
 }
 let monTableau = new Tableau2D(10, 10);
 
+//fonction de tirage pour les placements des malus, bonus, et des phrases commentaires 
 function De10() {
     let nombreFace = 10
     return Math.floor(Math.random() * nombreFace);
@@ -31,7 +36,10 @@ TabCommentairesMalus = ["Vous tombez sur des moines qui se sont égarés, ils vo
 TabCommentairesBonus = ["Vous retrouvez  le skateboard volant de quelqu'un qui vous ramène quelques temps en arrière.", "Vous vous rasez et avez l'air donc plus jeune .", "Vous avez trouvé un raccourci pour arriver à cette destination.",
     "vous craquez le jeu et gagnez du temps .", "Les dieux ont été cléments envers vous ", "Vous avez donné une Tesla à Mr Roumanet ce qui vous permet d'être plus rapide ."]
 
-console.log(TabMalus)
+TabCommentairesTresor = ["Vous avez trouvé un gisement de gaz, vous devenez donc le nouveau roi du pétrole du grésivaudan", "Vous avez trouvé, le trésor de Jean Moulin caché en 1943, vous décidez d'en profiter sans en avertir ses desendants",
+    "Vous avez trouvé le trésor, peut être un coup de chance ?", "Apres avoir soudoyé un policier de mistral, il vous à indiqué ou étai le trésor ", "Vous avez trouvé le trésor", "Vous avez trouvé le trésor"]
+
+//console.log(TabMalus)
 
 function Placementcases(diffictulte) {
 
@@ -41,14 +49,16 @@ function Placementcases(diffictulte) {
         monTableau[idx][idy] = TabMalus[De8()]
     }
     monTableau[De10()][De10()] = "Tresor";
+
 }
 diffictulte = 35
 Placementcases(diffictulte)
-console.log(monTableau)
+//console.log(monTableau)
 
+//affiche le tableau en html, et atribut les id aux cases
 function drawTableau2D(x, y, emplacement) {
     let idString = ""
-    let texte = "<table>"
+    let texte = "<table class='table'>"
     for (let xx = 0; xx < x; xx++) {
         texte += `<tr>`
         for (let yy = 0; yy < y; yy++) {
@@ -64,6 +74,7 @@ drawTableau2D(10, 10, "ici")
 
 compteurDeJours = 0
 
+//changement des couleurs des cases en fonction de sa catégorisation
 function choix(id) {
     console.log(id)
     let idcase = document.getElementById(id)
@@ -76,15 +87,17 @@ function choix(id) {
 
 
     if (monTableau[idx][idy] == "Tresor") {
+        idcase.style.backgroundColor = "rgba(255, 0, 226, 0.858)";
 
-        Findepartie = true
-        console.log("trouvé")
-        idcase.style.pointerEvents = "none"
+        Findepartie()
+        return document.getElementById("bousole").innerHTML = ""
+
+
     }
     else if (monTableau[idx][idy] == "Malus1") {
         compteurDeJours = compteurDeJours + 2
         idcase.style.backgroundColor = "rgba(255, 225, 0, 0.858)";
-        idcase.style.pointerEvents = "none"
+        idcase.style.pointerEvents = "none" //empeche de cliquer une deuxieme fois la case
         CommentairesMalus.innerHTML = TabCommentairesMalus[De6()] + "<Malus1> Pénalitée de 2 jours </Malus1>"
 
     }
@@ -116,7 +129,6 @@ function choix(id) {
         CommentairesMalus.innerHTML = TabCommentairesMalus[De6()] + "<Malus5> Pénalitée de 6 jours </Malus5>"
 
     }
-
     else if (monTableau[idx][idy] == "Bonus1") {
         compteurDeJours = compteurDeJours - 2
         idcase.style.backgroundColor = "rgba(0, 255, 157, 0.797)";
@@ -148,13 +160,25 @@ function choix(id) {
     }
     document.getElementById("jours").innerHTML = compteurDeJours
     BousoleNSOE()
+}
+let trouve = false
 
+function Findepartie() {
+
+    let CommentaireTresor = document.getElementById("commentaire")
+    let table = document.getElementById("table")
+    let pseudo  = document.getElementById("pseudo").value
+    trouve = true
+    table.style.pointerEvents = "none" // desactive le clic sur toutes la div
+    CommentaireTresor.innerHTML = "<tresor> " + TabCommentairesTresor[De6()] + " </tresor>" + `<form action='http://localhost/Chasse_au_tresor/v1/php/ajouterScore.php' method="post"> <input name="score" value="${compteurDeJours}" type="hidden" />  <input name="pseudo" value="${pseudo}" type="hidden"/> <input type="submit" value="Rejouer" /></form>`
 
 }
 
+
+//donne des indications sur l'emplacement du coffre dès que le joueur dépassse les 14 jours
 function BousoleNSOE() {
     let bousole = ""
-
+    //boucles pour trouver le coffre
     for (let i = 0; i < monTableau.length; i++) {
 
         for (let j = 0; j < monTableau.length; j++) {
@@ -166,19 +190,19 @@ function BousoleNSOE() {
         }
 
     }
-    console.log(coordonesX,coordonesY)
+    console.log(coordonesX, coordonesY)
 
-    if (compteurDeJours > 15) {
+    if (compteurDeJours > 14) {
         if (coordonesX < 4 && coordonesY < 4) {
             bousole = "Essayez au nord ouest"
 
         }
         else if (coordonesX > 4 && coordonesY < 4) {
-            bousole = "Essayez au nord est"
+            bousole = "Essayez au sud ouest"
 
         }
         else if (coordonesX < 4 && coordonesY > 4) {
-            bousole = "Essayez au sud ouest"
+            bousole = "Essayez au nord est"
 
         }
         else if (coordonesX > 4 && coordonesY > 4) {
@@ -187,5 +211,6 @@ function BousoleNSOE() {
         }
 
     }
+
     return document.getElementById("bousole").innerHTML = bousole
 }
