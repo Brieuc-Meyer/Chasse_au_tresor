@@ -26,7 +26,7 @@ function De6() {
     return Math.floor(Math.random() * nombreFace);
 }
 
-
+//initialisation des differents bonus / malus a la maniere du trésor et de leurs phrases à afficher  
 TabMalus = ["Bonus1", "Bonus2", "Bonus3", "Malus1", "Malus2", "Malus3", "Malus4", "Malus5"]
 
 TabCommentairesMalus = ["Vous tombez sur des moines qui se sont égarés, ils vous font donc tester leur dernière cuvée de 9e centenaire, vous en buvez trop est tombez dans un coma.",
@@ -74,7 +74,7 @@ drawTableau2D(10, 10, "ici")
 
 compteurDeJours = 0
 
-//changement des couleurs des cases en fonction de sa catégorisation
+//changement des couleurs des cases en fonction de sa catégorisation, bonus / malus 
 function choix(id) {
     console.log(id)
     let idcase = document.getElementById(id)
@@ -170,6 +170,7 @@ function Findepartie() {
     let pseudo  = document.getElementById("pseudo").value
     trouve = true
     table.style.pointerEvents = "none" // desactive le clic sur toutes la div
+    //création du formulaire qui envoie le score et le pseudo du joueur à la BDD 
     CommentaireTresor.innerHTML = "<tresor> " + TabCommentairesTresor[De6()] + " </tresor>" + `<form action='http://localhost/Chasse_au_tresor/v1/php/ajouterScore.php' method="post"> <input name="score" value="${compteurDeJours}" type="hidden" />  <input name="pseudo" value="${pseudo}" type="hidden"/> <input type="submit" value="Rejouer" /></form>`
 
 }
@@ -190,7 +191,7 @@ function BousoleNSOE() {
         }
 
     }
-    console.log(coordonesX, coordonesY)
+    //console.log(coordonesX, coordonesY)
 
     if (compteurDeJours > 14) {
         if (coordonesX < 4 && coordonesY < 4) {

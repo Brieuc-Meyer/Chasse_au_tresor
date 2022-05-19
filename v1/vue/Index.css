@@ -1,0 +1,57 @@
+td{
+    width: 200px;
+    height: 20px;
+    border-width: 0.5px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+    border-spacing: 0px;
+    text-align: center;
+    padding: 0px;
+    
+}
+h3{
+    margin-block-start: 7px;
+    margin-block-end: 7px;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; 
+
+}
+
+
+
+table{
+    border-spacing: 0px;
+
+}
+
+input{
+    text-align: center;
+    background: none;
+    border: 1px solid;
+    border-inline-start-width: 0.25em;
+    font: Calibri;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+}
+
+input[type=submit] {
+    text-align: center;
+    background: none;
+    border: 3px solid;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 700; 
+    margin-block-start: 7px;
+    margin-block-end: 7px;
+
+
+}
+
+
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+#pseudo{
+    z-index: 1;
+    position :static;
+}
